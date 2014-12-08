@@ -1,0 +1,31 @@
+{
+    "name": "futuring/components",
+    "description": "Components futuring",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Breno Douglas",
+            "email": "breno_douglas@hotmail.com"
+        }
+    ],
+    
+    "require": {
+        "php" : ">=5.3",
+        "composer/composer": "1.0.*@dev"
+    },
+    "autoload": {
+        "classmap": [
+            "Acl",
+            "Acl/Factory",
+            "Acl/Interfaces",
+            "Acl/Interfaces/Factory",
+            "Session",
+            "Session/Interfaces"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
