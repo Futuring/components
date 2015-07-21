@@ -27,7 +27,7 @@ class Messages implements MessagesInterface
     {
         $session = new Session();
         $session->addAttr($key, $message);
-        
+
         $storage = new Storage(self::NAME);
         $storage->addSession($key, $session);
     }
@@ -40,12 +40,14 @@ class Messages implements MessagesInterface
     {
         $storage = new Storage(self::NAME);
         $session = $storage->getSession($key);
-        
+
         if(! $storage->unsetSession($key,true)){
             return false;
         }
-        
-        return $session->getAttr($key);
+
+        $attr = $session->getAttr($key);
+
+        return $attr;
     }
 
 }

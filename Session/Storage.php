@@ -21,15 +21,15 @@ class Storage implements StorageInterface
     public function __construct($name)
     {
         $this->name = $name;
-        $this->session = &$_SESSION;
         $this->sessionCollection = new \ArrayIterator();
         $this->startSession();
     }
     
     private function startSession()
     {
-        if(!isset($_SESSION)){
+        if(session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
+            $this->session = &$_SESSION;
         }
     }
     public function addSession($key, Interfaces\Session $session)
@@ -62,12 +62,11 @@ class Storage implements StorageInterface
             return false;
         else:
             unset($this->session[$this->name]);
-            @session_destroy();
+            if(session_status() === PHP_SESSION_ACTIVE)
+                session_destroy();
         endif;
-        
-        
+
         $exists = $collection->offsetExists($key);
-        
         $exists ? $collection->offsetUnset($key) : false;
         
         return $exists;
